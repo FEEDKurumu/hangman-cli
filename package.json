@@ -1,0 +1,23 @@
+{
+  "name": "hangman-cli",
+  "version": "1.0.0",
+  "description": "wordpool.txt\r strings separated by ,",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FEEDKurumu/hangman-cli.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/FEEDKurumu/hangman-cli/issues"
+  },
+  "homepage": "https://github.com/FEEDKurumu/hangman-cli#readme",
+  "dependencies": {
+    "inquirer": "^3.3.0"
+  }
+}

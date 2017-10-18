@@ -1,8 +1,14 @@
 function letterConstructor(letter) {
   this.letter = letter;
-  this.shown = "_";
-  this.guessed = function() {
-    this.shown = this.letter;
+  if (this.letter === " ") {
+    this.shown = " ";
+  } else {
+    this.shown = "_";
+  }
+  this.guessed = function(a) {
+    if (a === this.letter) {
+      this.shown = this.letter;
+    }
   }
 }
 

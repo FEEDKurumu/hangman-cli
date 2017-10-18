@@ -1,1 +1,1 @@
-"word","test","stuff","thing"
+tea,coffee,orange juice,milk,bagel,croissant,egg,pancake,sausage,bacon,banana,cereal,donut,fruit,french toast,grits,hash browns,ham and eggs,muffin,oatmeal,pastry,scone,toast,waffle,yogurt
