@@ -1,5 +1,17 @@
 # hangman-cli
 
+## instructions
+  ** game picks a random word
+  ** you guess letters one by one
+  ** you win if the word is guessed before you run out of guesses
+  ** you lose if you run out of guesses before finishing the word
+
+
+
+
+
+
+
 ## wordpool.txt
 ** strings separated by ,
 **

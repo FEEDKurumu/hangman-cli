@@ -14,7 +14,7 @@ function getRandomWord() {//picks a random word from wordpool.txt
   fs.readFile("./wordpool.txt", "utf8", function(err, data) {
     if (err) { console.log(err); }
     var arr = data.split(",");
-    currentWord = arr[Math.floor(Math.random() * arr.length)];//puts that word into currentWord
+    currentWord = arr[Math.floor(Math.random() * arr.length)];//picks random word and puts that word into currentWord var
   })
 }
 
