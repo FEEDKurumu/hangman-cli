@@ -10,33 +10,33 @@ var guessesLeft;
 var allLetters;
 var guessedLetters;
 
-function getRandomWord() {
+function getRandomWord() {//picks a random word from wordpool.txt
   fs.readFile("./wordpool.txt", "utf8", function(err, data) {
     if (err) { console.log(err); }
     var arr = data.split(",");
-    currentWord = arr[Math.floor(Math.random() * arr.length)];
+    currentWord = arr[Math.floor(Math.random() * arr.length)];//puts that word into currentWord
   })
 }
 
 function updateBlanks() {
-  currentWordBlanks = [];
+  currentWordBlanks = [];//reset array
   for (key in currentWordObj) {
     var shown = currentWordObj[key].shown
-    currentWordBlanks.push(shown + " ");
+    currentWordBlanks.push(shown + " ");//add blanks or letters
   }
 }
 
-function reset() {
-  guessesLeft = 10;
-  allLetters = "qwertyuiopasdfghjklzxcvbnm".split("");
-  guessedLetters = [];
+function reset() {//starts a new game
+  guessesLeft = 10;//reset guesses
+  allLetters = "qwertyuiopasdfghjklzxcvbnm".split("");//reset available guesses array
+  guessedLetters = [];//reset guessed already to none
   getRandomWord();
 
   setTimeout(function() { 
-    currentWordObj = new wordConstructor(currentWord);
+    currentWordObj = new wordConstructor(currentWord);//constructs object for current word
     updateBlanks();
-    prompt();
-  }, 50);
+    prompt();//starts prompting for guesses
+  }, 30);
 }
 
 function newGuess() {
@@ -64,7 +64,7 @@ function newGamePrompt() {
 }
 
 function prompt() {
-  console.log(currentWordBlanks.join(" "));
+  console.log(currentWordBlanks.join(" "));//shows blanks on console _ _ _ _ _ _ _ _
   inquirer.prompt([
     {
       message: "Guess a letter!",
@@ -72,48 +72,49 @@ function prompt() {
     }
   ]).then(function(resp) {
     var guess = resp.guess;
-    if (guess.length === 0) {
+    if (guess.length === 0) {//check if empty string guess
       console.log("~~~~~~~~~~~~~~~");
       console.log(guessesLeft + " guesses left!");
       newGuess();
-    } else if (guess.length > 1) {
+    } else if (guess.length > 1) {//check if multiple letter guess
       console.log("~~~~~~~~~~~~~~~");
       console.log(guessesLeft + " guesses left!");
       newGuess();
     } else {
-      if (allLetters.indexOf(guess) >= 0 && currentWord.indexOf(guess) >= 0) {
+      if (allLetters.indexOf(guess) >= 0 && currentWord.indexOf(guess) >= 0) {//check if one letter guess and in available guesses array
         for (key in currentWordObj) {
           if (guess === currentWordObj[key].letter) {
             currentWordObj[key].guessed(guess);
           }
         }
         updateBlanks();
-        if (currentWordBlanks.indexOf("_ ") < 0) {
+        if (currentWordBlanks.indexOf("_ ") < 0) {//check win con
           console.log("You win!");
-          newGamePrompt();
+          console.log("The word was " + currentWord + "!");
+          newGamePrompt();//ask new game
         } else {
-          allLetters.splice(allLetters.indexOf(guess), 1);
+          allLetters.splice(allLetters.indexOf(guess), 1);//remove from available guesses array
           console.log("~~~~~~~~~~~~~~~");
           console.log("Correct! " + guessesLeft + " guesses left!");
-          newGuess();
+          newGuess();//prompt a guess
         }
-      } else if (allLetters.indexOf(guess) >= 0) {
+      } else if (allLetters.indexOf(guess) >= 0) {//check if in available guesses array
         guessesLeft--;
-        if (guessesLeft === 0) {
+        if (guessesLeft === 0) {//check lose con
           console.log("~~~~~~~~~~~~~~~");
           console.log("No guesses left! You lose :(");
           console.log("The word was " + currentWord + "!");
-          newGamePrompt();
+          newGamePrompt();//ask new game
         } else {
-          allLetters.splice(allLetters.indexOf(guess), 1);
-          guessedLetters.push(guess);
+          allLetters.splice(allLetters.indexOf(guess), 1);//remove from available guesses array
+          guessedLetters.push(guess);//add to array of letters already guessed
           console.log("~~~~~~~~~~~~~~~");
           console.log("Incorrect! " + guessesLeft + " guesses left!");
-          newGuess();
+          newGuess();//prompt a guess
         }
-      } else {
+      } else {//this means letter was already guessed
         console.log(guessesLeft + " guesses left!");
-        newGuess();
+        newGuess();//prompt a guess
       }
 
     }
