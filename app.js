@@ -19,10 +19,10 @@ function getRandomWord() {//picks a random word from wordpool.txt
 }
 
 function updateBlanks() {
-  currentWordBlanks = [];//reset array
+  currentWordBlanks = [];//reset array that gets logged to console
   for (key in currentWordObj) {
     var shown = currentWordObj[key].shown
-    currentWordBlanks.push(shown + " ");//add blanks or letters
+    currentWordBlanks.push(shown + " ");//add blanks or letters to array
   }
 }
 
